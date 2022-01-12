@@ -1,38 +1,41 @@
 import React from "react";
 import User from "./components/User";
+import axios from "axios";
 
 import FollowerList from "./components/FollowerList";
 
 class App extends React.Component {
   state = {
     currentUser: "bezzantsam",
-    user: {
-      avatar_url: "https://avatars.githubusercontent.com/u/83626945?v=4",
-      html_url: "https://github.com/bezzantsam",
-      name: "Sam Bezzant",
-      login: "bezzantsam",
-      public_repos: 70,
-      followers: 15,
-    },
-    followers: [
-      {
-        login: "CaitlinTalbert",
-        avatar_url: "https://avatars.githubusercontent.com/u/92820628?v=4",
-        html_url: "https://github.com/CaitlinTalbert",
-      },
-      {
-        login: "CaitlinTalbert",
-        avatar_url: "https://avatars.githubusercontent.com/u/92820628?v=4",
-        html_url: "https://github.com/CaitlinTalbert",
-      },
-      {
-        login: "CaitlinTalbert",
-        avatar_url: "https://avatars.githubusercontent.com/u/92820628?v=4",
-        html_url: "https://github.com/CaitlinTalbert",
-      },
-    ],
+    user: {},
+    followers: [],
   };
+  componentDidMount() {
+    axios
+      .get(`https://api.github.com/users/${this.state.currentUser}`)
+      .then((resp) => {
+        this.setState({
+          ...this.state,
+          user: resp.data
+      });
+  }
+  componentDidUpdate(prevProps, prevState){
+    if(this.state.user !== prevState.user){
+      axios
+      .get(`https://api.github.com/users/${this.state.currentUser}/followers`)
+      .then((resp) => {
+      
+        this.setState({
+          ...this.state,
+          followers: resp.data
+        })
+        this.setState({
+          ...this.state,
+          user: resp.data 
+    }
+  }
   render() {
+    
     return (
       <div>
         <h1>GITHUB INFO</h1>
