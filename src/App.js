@@ -1,6 +1,37 @@
 import React from "react";
+import User from "./components/User";
+
+import FollowerList from "./components/FollowerList";
 
 class App extends React.Component {
+  state = {
+    currentUser: "bezzantsam",
+    user: {
+      avatar_url: "https://avatars.githubusercontent.com/u/83626945?v=4",
+      html_url: "https://github.com/bezzantsam",
+      name: "Sam Bezzant",
+      login: "bezzantsam",
+      public_repos: 70,
+      followers: 15,
+    },
+    followers: [
+      {
+        login: "CaitlinTalbert",
+        avatar_url: "https://avatars.githubusercontent.com/u/92820628?v=4",
+        html_url: "https://github.com/CaitlinTalbert",
+      },
+      {
+        login: "CaitlinTalbert",
+        avatar_url: "https://avatars.githubusercontent.com/u/92820628?v=4",
+        html_url: "https://github.com/CaitlinTalbert",
+      },
+      {
+        login: "CaitlinTalbert",
+        avatar_url: "https://avatars.githubusercontent.com/u/92820628?v=4",
+        html_url: "https://github.com/CaitlinTalbert",
+      },
+    ],
+  };
   render() {
     return (
       <div>
@@ -9,59 +40,8 @@ class App extends React.Component {
           <input placeholder="Github Handle"></input>
           <button>Search</button>
         </form>
-        <div id="userCard">
-          <img src="https://avatars.githubusercontent.com/u/83626945?v=4" />
-          <a target="blank" href="https://github.com/bezzantsam">
-            <h3>Sam Bezzant</h3>
-            <p> (bezzantsam) </p>
-            <p> Total Repositories: 70</p>
-            <p>Total Followers: 15</p>
-          </a>
-        </div>
-        <div id="followers">
-          <div className="follower">
-            <img
-              width="200px"
-              src="https://avatars.githubusercontent.com/u/92820628?v=4"
-            />
-            <a target="blank" href="https://github.com/CaitlinTalbert">
-              <p> CaitlinTalbert </p>
-            </a>
-          </div>
-        </div>
-        <div id="followers">
-          <div className="follower">
-            <img
-              width="200px"
-              src="https://avatars.githubusercontent.com/u/92820628?v=4"
-            />
-            <a target="blank" href="https://github.com/CaitlinTalbert">
-              <p> CaitlinTalbert </p>
-            </a>
-          </div>
-        </div>
-        <div id="followers">
-          <div className="follower">
-            <img
-              width="200px"
-              src="https://avatars.githubusercontent.com/u/92820628?v=4"
-            />
-            <a target="blank" href="https://github.com/CaitlinTalbert">
-              <p> CaitlinTalbert </p>
-            </a>
-          </div>
-        </div>
-        <div id="followers">
-          <div className="follower">
-            <img
-              width="200px"
-              src="https://avatars.githubusercontent.com/u/92820628?v=4"
-            />
-            <a target="blank" href="https://github.com/CaitlinTalbert">
-              <p> CaitlinTalbert </p>
-            </a>
-          </div>
-        </div>
+        <User user={this.state.user} />
+        <FollowerList followers={this.state.followers} />
       </div>
     );
   }
